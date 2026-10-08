@@ -17,3 +17,7 @@ Las cuatro referencias del documento se ordenan por autor y enlazan sus DOI. Se 
 ## Archivos
 
 No requiere instalación ni servicios externos. HTML en la raíz; diseño en assets/styles.css; interacción en assets/main.js. Datos en assets/datos.json y assets/resultados.csv. Créditos y licencias en assets. Publicación mediante GitHub Pages en la rama main.
+
+## Ajuste visual
+
+Mayor luminosidad del fondo, tarjetas y acentos. Imágenes con mayor brillo, color y opacidad; sombras más suaves para mantener la lectura. Se retiraron las notas de creación en los encabezados y los comentarios de código.

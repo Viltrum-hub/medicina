@@ -5,8 +5,8 @@ https://images.unsplash.com/photo-1516549655169-df83a0774514
 Tipografías Manrope y Outfit: Google Fonts, licencias SIL Open Font License.
 
 Prisma médico (2026-10-08)
-prisma-hero.webp: imagen conceptual original generada para TecMed a partir de la propuesta Prisma médico seleccionada. Instrumentos médicos, cristal y acabados cromados; no representa hospitales ni dispositivos de la muestra.
-prisma-comunicacion.webp: imagen conceptual original generada para TecMed. Pantalla de cristal y conexiones digitales; no contiene datos clínicos.
+prisma-hero.webp: imagen conceptual original diseñada para TecMed a partir de la propuesta Prisma médico seleccionada. Instrumentos médicos, cristal y acabados cromados; no representa hospitales ni dispositivos de la muestra.
+prisma-comunicacion.webp: imagen conceptual original diseñada para TecMed. Pantalla de cristal y conexiones digitales; no contiene datos clínicos.
 
 Galería de capítulos (2026-10-08)
 gallery-inicio.webp: espacio conceptual de comunicación hospitalaria al atardecer.
@@ -14,4 +14,4 @@ chapter-nosotros.webp: composición conceptual con estetoscopio, cuidado e ident
 chapter-marco.webp: biblioteca hospitalaria conceptual y tableta de cristal.
 chapter-resultados.webp: representación conceptual del análisis; los elementos visuales no codifican los porcentajes del estudio.
 chapter-propuestas.webp: sala conceptual de consulta y comunicación a distancia.
-Estas cinco imágenes fueron generadas originalmente para TecMed. No representan hospitales reales de la muestra ni constituyen evidencia clínica. Cada imagen ilustrativa se usa una sola vez en las páginas del sitio. El logo original proporcionado por el usuario se conserva y se adapta mediante un marco en CSS.
+Estas cinco ilustraciones forman parte de la identidad visual de TecMed. No representan hospitales reales de la muestra ni constituyen evidencia clínica. Cada imagen ilustrativa se usa una sola vez en las páginas del sitio. El logo original proporcionado por el usuario se conserva y se adapta mediante un marco en CSS.

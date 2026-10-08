@@ -48,13 +48,13 @@ if (canvas && !reduced.matches && canvas.getContext) {
   const resize = () => {
     width = innerWidth; height = innerHeight; const dpr = Math.min(devicePixelRatio || 1, 2);
     canvas.width = width * dpr; canvas.height = height * dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
-    dots = Array.from({length:width < 760 ? 18 : 42}, () => ({x:Math.random()*width,y:Math.random()*height,r:Math.random()*1.2+.4,v:Math.random()*.18+.06,a:Math.random()*.24+.08}));
+    dots = Array.from({length:width < 760 ? 18 : 42}, () => ({x:Math.random()*width,y:Math.random()*height,r:Math.random()*1.2+.4,v:Math.random()*.18+.06,a:Math.random()*.3+.14}));
   };
   const draw = now => {
     if (document.hidden || reduced.matches) { frame = 0; return; }
     if (now - previous > 32) {
       const dt = Math.min((now - previous) / 16.67, 3); previous = now; ctx.clearRect(0,0,width,height);
-      dots.forEach(dot => { dot.y -= dot.v * dt; if (dot.y < -3) dot.y = height + 3; ctx.beginPath();ctx.arc(dot.x,dot.y,dot.r,0,Math.PI*2);ctx.fillStyle=`rgba(213,191,149,${dot.a})`;ctx.fill(); });
+      dots.forEach(dot => { dot.y -= dot.v * dt; if (dot.y < -3) dot.y = height + 3; ctx.beginPath();ctx.arc(dot.x,dot.y,dot.r,0,Math.PI*2);ctx.fillStyle=`rgba(238,208,160,${dot.a})`;ctx.fill(); });
     }
     frame = requestAnimationFrame(draw);
   };
