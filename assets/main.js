@@ -20,7 +20,7 @@ document.addEventListener('keydown', (event) => {
 navigation.addEventListener('click', (event) => {
   if (event.target.closest('a')) closeMenu();
 });
-const desktop = window.matchMedia('(min-width: 801px)');
+const desktop = window.matchMedia('(min-width: 851px)');
 desktop.addEventListener('change', closeMenu);
 const filter = document.querySelector('#metric-filter');
 if (filter) {
@@ -32,5 +32,59 @@ if (filter) {
     document.querySelector('#filter-status').textContent = filter.value === 'all'
       ? 'Se muestran los tres criterios disponibles.'
       : `Se muestra el criterio: ${label}.`;
+  });
+}
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const progress = document.querySelector('.reading-progress');
+let progressPending = false;
+function updateProgress() {
+  const range = document.documentElement.scrollHeight - window.innerHeight;
+  if (progress) progress.style.width = `${range > 0 ? Math.min(100, window.scrollY / range * 100) : 0}%`;
+  progressPending = false;
+}
+window.addEventListener('scroll', () => {
+  if (!progressPending) {
+    progressPending = true;
+    window.requestAnimationFrame(updateProgress);
+  }
+}, { passive: true });
+window.addEventListener('resize', updateProgress);
+updateProgress();
+
+if ('IntersectionObserver' in window && !reducedMotion.matches) {
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('reveal-pending');
+        observer.unobserve(entry.target);
+      }
+    }
+  }, { threshold: 0.08, rootMargin: '0px 0px -25px 0px' });
+  for (const item of document.querySelectorAll('.content > .section, .route .row, .next-page')) {
+    item.classList.add('reveal');
+    if (item.getBoundingClientRect().top > window.innerHeight) item.classList.add('reveal-pending');
+    observer.observe(item);
+  }
+  reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) {
+      observer.disconnect();
+      document.querySelectorAll('.reveal-pending').forEach((item) => item.classList.remove('reveal-pending'));
+    }
+  });
+}
+
+const heroArt = document.querySelector('.lab-art');
+const hero = document.querySelector('.home-hero');
+if (heroArt && hero && window.matchMedia('(pointer:fine)').matches) {
+  hero.addEventListener('pointermove', (event) => {
+    if (reducedMotion.matches) return;
+    const box = hero.getBoundingClientRect();
+    heroArt.style.setProperty('--pointer-x', String(Math.max(-1, Math.min(1, (event.clientX - box.left) / box.width * 2 - 1))));
+    heroArt.style.setProperty('--pointer-y', String(Math.max(-1, Math.min(1, (event.clientY - box.top) / box.height * 2 - 1))));
+  }, { passive: true });
+  hero.addEventListener('pointerleave', () => {
+    heroArt.style.setProperty('--pointer-x', '0');
+    heroArt.style.setProperty('--pointer-y', '0');
   });
 }

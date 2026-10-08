@@ -19,3 +19,9 @@ El CSS adapta columnas, navegación y tamaños a pantallas pequeñas. El conteni
 ## Publicación y validación
 
 GitHub Pages sirve el sitio desde la rama main y la raíz del repositorio. Se revisaron las rutas locales, anclas, IDs únicos, un H1 por página y sintaxis JavaScript. No se incorporan formularios ni servicios simulados.
+
+## Acabado visual
+
+La segunda versión utiliza tipografías Manrope y Outfit locales, una cabecera flotante, fotografía hospitalaria con capas de comunicación visual, movimiento leve del trazo conceptual y módulos, navegación de capítulos y una barra de progreso de lectura. El dashboard añade indicadores circulares calculados con los mismos porcentajes disponibles. Las propuestas permiten desplegar su explicación con controles nativos accesibles. El marco teórico usa una superficie clara para mantener la legibilidad.
+
+Las fotografías son ilustrativas. El trazo animado no representa una señal clínica real. La preferencia de movimiento reducido desactiva las animaciones y las transiciones; las animaciones de entrada no afectan a la disponibilidad del contenido cuando JavaScript no está presente. Las licencias de las tipografías se incluyen en assets.
