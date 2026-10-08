@@ -95,8 +95,8 @@ if (particleCanvas) {
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * fieldWidth,
         y: Math.random() * fieldHeight,
-        size: 0.7 + Math.random() * 1.8,
-        opacity: 0.15 + Math.random() * 0.3,
+        size: 0.8 + Math.random() * 2.2,
+        opacity: 0.18 + Math.random() * 0.28,
         speed: 0.04 + Math.random() * 0.12,
         phase: Math.random() * Math.PI * 2
       }));
@@ -115,6 +115,13 @@ if (particleCanvas) {
           if (particle.y < -5) particle.y = fieldHeight + 5;
           if (particle.x < -5) particle.x = fieldWidth + 5;
           if (particle.x > fieldWidth + 5) particle.x = -5;
+          if (particle.size > 2.4) {
+            const halo = context.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.size * 5);
+            halo.addColorStop(0, 'rgba(113, 167, 131, 0.12)');
+            halo.addColorStop(1, 'rgba(113, 167, 131, 0)');
+            context.fillStyle = halo;
+            context.fillRect(particle.x - particle.size * 5, particle.y - particle.size * 5, particle.size * 10, particle.size * 10);
+          }
           context.beginPath();
           context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
           context.fillStyle = `rgba(39, 106, 66, ${particle.opacity})`;
