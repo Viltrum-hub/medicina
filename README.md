@@ -25,3 +25,9 @@ No se configuró ni activó hosting. Para publicar posteriormente, se puede habi
 ## Revisión
 
 Se comprobaron enlaces locales, estructura HTML, coincidencia de datos, recursos y sintaxis JavaScript. Las pruebas visuales en navegadores, dispositivos y lectores de pantalla quedan pendientes.
+
+## Dirección visual del rediseño
+
+Concepto de publicación médica contemporánea: marfil, azul cobalto y verde suave; tipografía Helvetica/Arial sin dependencias externas. Cabecera en dos niveles, navegación numerada, portada tipográfica, identidad del proyecto, columna de lectura con índice, panel de datos y plan de acción. Se revisaron el HTML de Inicio y las hojas de estilos de Biotecnología y Bosques para evitar repetir sus fondos oscuros, fuentes Space Grotesk, portadas fotográficas y componentes redondeados. El logo original y las cifras se conservan.
+
+Se verificaron rutas locales y anclas, navegación activa, estructura semántica, consistencia de datos, sintaxis JavaScript y contraste de los pares principales (mínimo 4,5:1). Se revisaron reglas CSS para móvil y reducción de movimiento. No se ejecutó una revisión visual en navegador ni una medición real de desbordamiento en dispositivos; siguen pendientes.

@@ -20,7 +20,7 @@ document.addEventListener('keydown', (event) => {
 navigation.addEventListener('click', (event) => {
   if (event.target.closest('a')) closeMenu();
 });
-const desktop = window.matchMedia('(min-width: 821px)');
+const desktop = window.matchMedia('(min-width: 801px)');
 desktop.addEventListener('change', closeMenu);
 const filter = document.querySelector('#metric-filter');
 if (filter) {
