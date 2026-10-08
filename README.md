@@ -21,3 +21,5 @@ No requiere instalación ni servicios externos. HTML en la raíz; diseño en ass
 ## Ajuste visual
 
 Mayor luminosidad del fondo, tarjetas y acentos. Imágenes con mayor brillo, color y opacidad; sombras más suaves para mantener la lectura. Se retiraron las notas de creación en los encabezados y los comentarios de código.
+
+Nosotros presenta el significado del corazón, pulso, estetoscopio, círculo, color azul y nombre TecMed, junto con las dos partes del eslogan. Se reemplazó el recorrido de capítulos por esta sección de identidad. El brillo de imágenes y materiales se aplica desde la hoja de estilos compartida de las cinco páginas.
