@@ -3,3 +3,7 @@ https://images.unsplash.com/photo-1576091160399-112ba8d25d1d
 https://images.unsplash.com/photo-1576091160550-2173dba999ef
 https://images.unsplash.com/photo-1516549655169-df83a0774514
 Tipografías Manrope y Outfit: Google Fonts, licencias SIL Open Font License.
+
+Prisma médico (2026-10-08)
+prisma-hero.webp: imagen conceptual original generada para TecMed a partir de la propuesta Prisma médico seleccionada. Instrumentos médicos, cristal y acabados cromados; no representa hospitales ni dispositivos de la muestra.
+prisma-comunicacion.webp: imagen conceptual original generada para TecMed. Pantalla de cristal y conexiones digitales; no contiene datos clínicos.

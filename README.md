@@ -1,21 +1,25 @@
-# TecMed
+# TecMed — Prisma médico
 
-Sitio académico sobre avances tecnológicos en la medicina de Estados Unidos. Cada página tiene una dirección independiente: Inicio, Nosotros, Marco teórico, Resultados y Propuestas de cambio.
+Sitio académico sobre herramientas digitales y comunicación hospitalaria en Estados Unidos, basado en Marco teorico de la Gabriela.docx. Páginas independientes: Inicio, Nosotros, Marco teórico, Resultados y Propuestas de cambio.
 
-## Uso y edición
+## Uso
 
-Abre `index.html` directamente en un navegador. No requiere instalación ni base de datos. Los archivos HTML contienen los textos, `assets/styles.css` controla el diseño y `assets/main.js` controla el menú móvil y el filtro de resultados. El logo original se conserva en `assets/tecmed-logo.jpeg`.
+No requiere instalación. Abre index.html o utiliza GitHub Pages. Los textos están en los archivos HTML; assets/styles.css controla el diseño; assets/main.js controla el menú móvil, el filtro de resultados, las entradas suaves, el progreso de lectura y las partículas.
 
-## Datos
+## Contenido
 
-Se mantienen las cifras existentes del marco teórico: 97 %, 94 % y 90 %, sobre una muestra de 100 hospitales oncológicos observada en 2023. Las cifras están en Inicio, Resultados, `assets/datos.json` y `assets/resultados.csv`; cualquier actualización debe conservar la consistencia entre estos recursos. Las propuestas siguen siendo acciones sugeridas, sin implementación evaluada. Se conservan las referencias y precisiones bibliográficas de la página Marco teórico.
+La evidencia específica corresponde a 100 hospitales oncológicos observados entre el 17 de septiembre y el 24 de octubre de 2023. Se conservan 97 % para redes sociales, 94 % para portales y 90 % para aplicaciones móviles. Las mismas cifras aparecen en Inicio, Resultados, assets/datos.json y assets/resultados.csv. No se añaden fuentes o estadísticas externas. Las propuestas son acciones sugeridas sin implementación evaluada. El marco teórico mantiene citas y referencias, incluyendo las precisiones bibliográficas del documento.
 
-## Diseño
+## Diseño seleccionado
 
-Identidad editorial médica: fondo marfil, tipografía Manrope para navegación y texto, Georgia para titulares, azul tinta y acento terracota. Portada con gran titular y fotografía panorámica; capítulos con encabezados sobrios; propuestas en una lista numerada desplegable y resultados con indicadores, filtro y descarga CSV. Se conservan el logo, los textos, las cifras y las referencias. No hay señales clínicas simuladas ni capas de red sobre las fotografías.
+Prisma médico: blanco perla, jade y plata, un titular panorámico sobre una escena tecnológica original, navegación superior y un índice de capítulos en la portada. Se conserva el logo original. Los encabezados y secciones interiores utilizan los mismos materiales y colores con distribuciones adaptadas al contenido de cada página. Las imágenes son ilustraciones conceptuales, no evidencia sobre la muestra del estudio ni dispositivos reales.
 
-Las fotografías se guardan localmente y son ilustrativas; sus créditos están en assets/creditos.txt. No representan a los hospitales de la muestra. Las licencias de las fuentes están en assets.
+Las imágenes se sirven localmente en WebP. Sus créditos figuran en assets/creditos.txt. Las fuentes Manrope y Outfit se sirven localmente; las licencias están en assets.
 
-## Accesibilidad y publicación
+## Accesibilidad y rendimiento
 
-El menú se adapta a pantallas pequeñas, los controles tienen foco visible y se respeta el movimiento reducido. Los textos están disponibles sin JavaScript. GitHub Pages publica desde main y la raíz del repositorio. Se revisan los enlaces, anclas, estructura HTML y sintaxis JavaScript antes de publicar.
+El diseño adapta navegación, columnas, títulos y dashboard a pantallas pequeñas. Las partículas no interceptan controles, reducen su cantidad en pantallas pequeñas y se detienen cuando la página no está visible. El movimiento reducido desactiva partículas y transiciones. El contenido y la navegación siguen disponibles sin JavaScript. El menú admite Escape y los controles tienen foco visible. El gráfico cuenta con tabla accesible y descarga CSV.
+
+## Publicación
+
+GitHub Pages sirve la raíz de la rama main. Antes de publicar se revisan enlaces locales, anclas, identificadores, un H1 por página, estructura HTML, contraste y sintaxis JavaScript. No se incorporan formularios ni servicios simulados.
