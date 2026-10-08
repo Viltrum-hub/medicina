@@ -12,16 +12,10 @@ Se mantienen las cifras existentes del marco teórico: 97 %, 94 % y 90 %, sobre 
 
 ## Diseño
 
-Identidad médica en azul profundo, blanco frío y cian: navegación compacta, encabezados con imágenes y contexto, propuestas en una cuadrícula visual, lectura con índice, dashboard con filtros y pie de página compacto. Las fotografías ilustrativas se guardan localmente; sus enlaces figuran en `assets/creditos.txt`. No son evidencia sobre los hospitales de la muestra. El sitio no carga imágenes ni bibliotecas desde servicios externos.
+Identidad editorial médica: fondo marfil, tipografía Manrope para navegación y texto, Georgia para titulares, azul tinta y acento terracota. Portada con gran titular y fotografía panorámica; capítulos con encabezados sobrios; propuestas en una lista numerada desplegable y resultados con indicadores, filtro y descarga CSV. Se conservan el logo, los textos, las cifras y las referencias. No hay señales clínicas simuladas ni capas de red sobre las fotografías.
 
-El CSS adapta columnas, navegación y tamaños a pantallas pequeñas. El contenido sigue visible si JavaScript no está disponible y se respeta la preferencia de movimiento reducido.
+Las fotografías se guardan localmente y son ilustrativas; sus créditos están en assets/creditos.txt. No representan a los hospitales de la muestra. Las licencias de las fuentes están en assets.
 
-## Publicación y validación
+## Accesibilidad y publicación
 
-GitHub Pages sirve el sitio desde la rama main y la raíz del repositorio. Se revisaron las rutas locales, anclas, IDs únicos, un H1 por página y sintaxis JavaScript. No se incorporan formularios ni servicios simulados.
-
-## Acabado visual
-
-La segunda versión utiliza tipografías Manrope y Outfit locales, una cabecera flotante, fotografía hospitalaria con capas de comunicación visual, movimiento leve del trazo conceptual y módulos, navegación de capítulos y una barra de progreso de lectura. El dashboard añade indicadores circulares calculados con los mismos porcentajes disponibles. Las propuestas permiten desplegar su explicación con controles nativos accesibles. El marco teórico usa una superficie clara para mantener la legibilidad.
-
-Las fotografías son ilustrativas. El trazo animado no representa una señal clínica real. La preferencia de movimiento reducido desactiva las animaciones y las transiciones; las animaciones de entrada no afectan a la disponibilidad del contenido cuando JavaScript no está presente. Las licencias de las tipografías se incluyen en assets.
+El menú se adapta a pantallas pequeñas, los controles tienen foco visible y se respeta el movimiento reducido. Los textos están disponibles sin JavaScript. GitHub Pages publica desde main y la raíz del repositorio. Se revisan los enlaces, anclas, estructura HTML y sintaxis JavaScript antes de publicar.

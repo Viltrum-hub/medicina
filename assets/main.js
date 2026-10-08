@@ -74,17 +74,3 @@ if ('IntersectionObserver' in window && !reducedMotion.matches) {
   });
 }
 
-const heroArt = document.querySelector('.lab-art');
-const hero = document.querySelector('.home-hero');
-if (heroArt && hero && window.matchMedia('(pointer:fine)').matches) {
-  hero.addEventListener('pointermove', (event) => {
-    if (reducedMotion.matches) return;
-    const box = hero.getBoundingClientRect();
-    heroArt.style.setProperty('--pointer-x', String(Math.max(-1, Math.min(1, (event.clientX - box.left) / box.width * 2 - 1))));
-    heroArt.style.setProperty('--pointer-y', String(Math.max(-1, Math.min(1, (event.clientY - box.top) / box.height * 2 - 1))));
-  }, { passive: true });
-  hero.addEventListener('pointerleave', () => {
-    heroArt.style.setProperty('--pointer-x', '0');
-    heroArt.style.setProperty('--pointer-y', '0');
-  });
-}
