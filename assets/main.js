@@ -1,146 +1,65 @@
 'use strict';
 document.documentElement.classList.add('js');
-const toggle = document.querySelector('.menu-toggle');
-const navigation = document.querySelector('#navigation');
-function closeMenu() {
-  navigation.classList.remove('is-open');
-  toggle.setAttribute('aria-expanded', 'false');
+const menu = document.querySelector('.menu-toggle');
+const nav = document.querySelector('#site-nav');
+if (menu && nav) {
+  menu.addEventListener('click', () => { const open = menu.getAttribute('aria-expanded') !== 'true'; menu.setAttribute('aria-expanded', String(open)); nav.classList.toggle('is-open', open); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && nav.classList.contains('is-open')) { nav.classList.remove('is-open'); menu.setAttribute('aria-expanded', 'false'); menu.focus(); } });
 }
-toggle.addEventListener('click', () => {
-  const open = toggle.getAttribute('aria-expanded') !== 'true';
-  navigation.classList.toggle('is-open', open);
-  toggle.setAttribute('aria-expanded', String(open));
-});
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-    closeMenu();
-    toggle.focus();
-  }
-});
-navigation.addEventListener('click', (event) => {
-  if (event.target.closest('a')) closeMenu();
-});
-const desktop = window.matchMedia('(min-width: 851px)');
-desktop.addEventListener('change', closeMenu);
-const filter = document.querySelector('#metric-filter');
-if (filter) {
-  filter.addEventListener('change', () => {
-    document.querySelectorAll('[data-metric]').forEach((item) => {
-      item.hidden = filter.value !== 'all' && item.dataset.metric !== filter.value;
-    });
-    const label = filter.options[filter.selectedIndex].text;
-    document.querySelector('#filter-status').textContent = filter.value === 'all'
-      ? 'Se muestran los tres criterios disponibles.'
-      : `Se muestra el criterio: ${label}.`;
+const panels = [...document.querySelectorAll('.gallery-panel')];
+function activatePanel(index) {
+  panels.forEach((panel, i) => {
+    const active = i === index;
+    panel.classList.toggle('is-active', active);
+    panel.querySelector('.panel-trigger').setAttribute('aria-expanded', String(active));
   });
 }
-
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+panels.forEach((panel, i) => {
+  const trigger = panel.querySelector('.panel-trigger');
+  trigger.addEventListener('click', () => activatePanel(i));
+  trigger.addEventListener('keydown', event => {
+    if (['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+      event.preventDefault();
+      let next = event.key === 'Home' ? 0 : event.key === 'End' ? panels.length - 1 : (i + (['ArrowRight','ArrowDown'].includes(event.key) ? 1 : -1) + panels.length) % panels.length;
+      activatePanel(next); panels[next].querySelector('.panel-trigger').focus();
+    }
+  });
+});
+const filter = document.querySelector('#result-filter');
+if (filter) filter.addEventListener('change', () => {
+  const cards = [...document.querySelectorAll('[data-metric]')];
+  cards.forEach(card => { card.hidden = filter.value !== 'all' && card.dataset.metric !== filter.value; });
+  document.querySelector('#filter-status').textContent = filter.value === 'all' ? 'Se muestran los tres indicadores.' : `Se muestra: ${filter.options[filter.selectedIndex].text}.`;
+});
 const progress = document.querySelector('.reading-progress');
-let progressPending = false;
+let scrollPending = false;
 function updateProgress() {
-  const range = document.documentElement.scrollHeight - window.innerHeight;
-  if (progress) progress.style.width = `${range > 0 ? Math.min(100, window.scrollY / range * 100) : 0}%`;
-  progressPending = false;
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  if (progress) progress.style.width = `${total > 0 ? Math.min(100, window.scrollY / total * 100) : 0}%`;
+  scrollPending = false;
 }
-window.addEventListener('scroll', () => {
-  if (!progressPending) {
-    progressPending = true;
-    window.requestAnimationFrame(updateProgress);
-  }
-}, { passive: true });
-window.addEventListener('resize', updateProgress);
-updateProgress();
-
-if ('IntersectionObserver' in window && !reducedMotion.matches) {
-  const observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) {
-        entry.target.classList.remove('reveal-pending');
-        observer.unobserve(entry.target);
-      }
+window.addEventListener('scroll', () => { if (!scrollPending) { scrollPending = true; requestAnimationFrame(updateProgress); } }, {passive:true});
+window.addEventListener('resize', updateProgress); updateProgress();
+const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+const canvas = document.querySelector('#particles');
+if (canvas && !reduced.matches && canvas.getContext) {
+  const ctx = canvas.getContext('2d');
+  let dots = [], width = 0, height = 0, frame = 0, previous = 0;
+  const resize = () => {
+    width = innerWidth; height = innerHeight; const dpr = Math.min(devicePixelRatio || 1, 2);
+    canvas.width = width * dpr; canvas.height = height * dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    dots = Array.from({length:width < 760 ? 18 : 42}, () => ({x:Math.random()*width,y:Math.random()*height,r:Math.random()*1.2+.4,v:Math.random()*.18+.06,a:Math.random()*.24+.08}));
+  };
+  const draw = now => {
+    if (document.hidden || reduced.matches) { frame = 0; return; }
+    if (now - previous > 32) {
+      const dt = Math.min((now - previous) / 16.67, 3); previous = now; ctx.clearRect(0,0,width,height);
+      dots.forEach(dot => { dot.y -= dot.v * dt; if (dot.y < -3) dot.y = height + 3; ctx.beginPath();ctx.arc(dot.x,dot.y,dot.r,0,Math.PI*2);ctx.fillStyle=`rgba(213,191,149,${dot.a})`;ctx.fill(); });
     }
-  }, { threshold: 0.08, rootMargin: '0px 0px -25px 0px' });
-  for (const item of document.querySelectorAll('.content > .section, .route .row, .next-page')) {
-    item.classList.add('reveal');
-    if (item.getBoundingClientRect().top > window.innerHeight) item.classList.add('reveal-pending');
-    observer.observe(item);
-  }
-  reducedMotion.addEventListener('change', () => {
-    if (reducedMotion.matches) {
-      observer.disconnect();
-      document.querySelectorAll('.reveal-pending').forEach((item) => item.classList.remove('reveal-pending'));
-    }
-  });
-}
-
-
-const particleCanvas = document.querySelector('.particle-field');
-if (particleCanvas) {
-  const context = particleCanvas.getContext('2d');
-  if (context) {
-    let particles = [];
-    let frame = 0;
-    let lastPaint = 0;
-    let fieldWidth = 0;
-    let fieldHeight = 0;
-    function resizeField() {
-      fieldWidth = window.innerWidth;
-      fieldHeight = window.innerHeight;
-      const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
-      particleCanvas.width = Math.round(fieldWidth * ratio);
-      particleCanvas.height = Math.round(fieldHeight * ratio);
-      context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      const count = fieldWidth < 600 ? 24 : Math.min(65, Math.round(fieldWidth / 22));
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * fieldWidth,
-        y: Math.random() * fieldHeight,
-        size: 0.8 + Math.random() * 2.2,
-        opacity: 0.18 + Math.random() * 0.28,
-        speed: 0.04 + Math.random() * 0.12,
-        phase: Math.random() * Math.PI * 2
-      }));
-    }
-    function paintField(time) {
-      if (document.hidden || reducedMotion.matches) {
-        frame = 0;
-        context.clearRect(0, 0, fieldWidth, fieldHeight);
-        return;
-      }
-      if (time - lastPaint > 32) {
-        context.clearRect(0, 0, fieldWidth, fieldHeight);
-        for (const particle of particles) {
-          particle.y -= particle.speed;
-          particle.x += Math.sin(time / 6500 + particle.phase) * 0.06;
-          if (particle.y < -5) particle.y = fieldHeight + 5;
-          if (particle.x < -5) particle.x = fieldWidth + 5;
-          if (particle.x > fieldWidth + 5) particle.x = -5;
-          if (particle.size > 2.4) {
-            const halo = context.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.size * 5);
-            halo.addColorStop(0, 'rgba(113, 167, 131, 0.12)');
-            halo.addColorStop(1, 'rgba(113, 167, 131, 0)');
-            context.fillStyle = halo;
-            context.fillRect(particle.x - particle.size * 5, particle.y - particle.size * 5, particle.size * 10, particle.size * 10);
-          }
-          context.beginPath();
-          context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-          context.fillStyle = `rgba(39, 106, 66, ${particle.opacity})`;
-          context.fill();
-        }
-        lastPaint = time;
-      }
-      frame = window.requestAnimationFrame(paintField);
-    }
-    function syncField() {
-      if (frame) window.cancelAnimationFrame(frame);
-      frame = 0;
-      if (!document.hidden && !reducedMotion.matches) frame = window.requestAnimationFrame(paintField);
-      else context.clearRect(0, 0, fieldWidth, fieldHeight);
-    }
-    window.addEventListener('resize', resizeField, { passive: true });
-    document.addEventListener('visibilitychange', syncField);
-    reducedMotion.addEventListener('change', syncField);
-    resizeField();
-    syncField();
-  }
+    frame = requestAnimationFrame(draw);
+  };
+  const resume = () => { if (!document.hidden && !reduced.matches && !frame) { previous = performance.now(); frame = requestAnimationFrame(draw); } };
+  window.addEventListener('resize', resize); document.addEventListener('visibilitychange', resume);
+  reduced.addEventListener('change', () => { if (reduced.matches) { cancelAnimationFrame(frame);frame=0;ctx.clearRect(0,0,width,height); } else resume(); });
+  resize();resume();
 }
