@@ -1,12 +1,12 @@
-# TecMed — Galería de capítulos
+# TecMed — Pulso editorial
 
 Sitio académico sobre herramientas digitales y comunicación hospitalaria en Estados Unidos, basado en Marco teorico de la Gabriela.docx. Cinco páginas independientes: Inicio, Nosotros, Marco teórico, Resultados y Propuestas de cambio.
 
 ## Diseño y navegación
 
-Galería horizontal de cinco capítulos expandibles, verde bosque oscuro, carbón y champán. Los títulos emplean Georgia y el texto Manrope local. Logo original del usuario con marco champán. Eslogan: «Tecnología que conecta, medicina que cuida.»
+Portada editorial con titular tipográfico e imágenes superpuestas. Paleta borgoña y rosa metálico; se mantienen el logo original y el eslogan «Tecnología que conecta, medicina que cuida.». Las páginas interiores comparten los materiales, acentos y colores.
 
-Los capítulos se abren con botones; admiten teclado y flechas. En móvil se apilan verticalmente y el menú se despliega con un botón. Sin JavaScript, los capítulos y la navegación permanecen disponibles. El movimiento reducido desactiva partículas y transiciones. Las partículas se detienen con la pestaña oculta. Las imágenes ilustrativas tienen una sola aparición en el HTML de todo el sitio; el logo es un elemento de identidad. Las páginas interiores utilizan imágenes originales distintas de las portadas de la galería.
+La navegación enlaza las cinco páginas independientes. En móvil las imágenes se reordenan y el menú se abre con un botón. El movimiento reducido desactiva partículas y transiciones. Las imágenes ilustrativas no se repiten entre páginas. Se mantiene intacta la información académica, las referencias, las cifras y la explicación del logo y del eslogan.
 
 ## Contenido
 

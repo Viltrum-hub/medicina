@@ -15,3 +15,8 @@ chapter-marco.webp: biblioteca hospitalaria conceptual y tableta de cristal.
 chapter-resultados.webp: representación conceptual del análisis; los elementos visuales no codifican los porcentajes del estudio.
 chapter-propuestas.webp: sala conceptual de consulta y comunicación a distancia.
 Estas cinco ilustraciones forman parte de la identidad visual de TecMed. No representan hospitales reales de la muestra ni constituyen evidencia clínica. Cada imagen ilustrativa se usa una sola vez en las páginas del sitio. El logo original proporcionado por el usuario se conserva y se adapta mediante un marco en CSS.
+
+Pulso editorial — borgoña y rosa metálico
+rose-instrument.webp: ilustración de un estetoscopio con reflejos rosados.
+rose-network.webp: ilustración de una tableta con conexiones digitales abstractas.
+Imágenes ilustrativas; no son evidencia del estudio ni contienen datos de pacientes.
