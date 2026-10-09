@@ -6,25 +6,6 @@ if (menu && nav) {
   menu.addEventListener('click', () => { const open = menu.getAttribute('aria-expanded') !== 'true'; menu.setAttribute('aria-expanded', String(open)); nav.classList.toggle('is-open', open); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && nav.classList.contains('is-open')) { nav.classList.remove('is-open'); menu.setAttribute('aria-expanded', 'false'); menu.focus(); } });
 }
-const panels = [...document.querySelectorAll('.gallery-panel')];
-function activatePanel(index) {
-  panels.forEach((panel, i) => {
-    const active = i === index;
-    panel.classList.toggle('is-active', active);
-    panel.querySelector('.panel-trigger').setAttribute('aria-expanded', String(active));
-  });
-}
-panels.forEach((panel, i) => {
-  const trigger = panel.querySelector('.panel-trigger');
-  trigger.addEventListener('click', () => activatePanel(i));
-  trigger.addEventListener('keydown', event => {
-    if (['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-      event.preventDefault();
-      let next = event.key === 'Home' ? 0 : event.key === 'End' ? panels.length - 1 : (i + (['ArrowRight','ArrowDown'].includes(event.key) ? 1 : -1) + panels.length) % panels.length;
-      activatePanel(next); panels[next].querySelector('.panel-trigger').focus();
-    }
-  });
-});
 const filter = document.querySelector('#result-filter');
 if (filter) filter.addEventListener('change', () => {
   const cards = [...document.querySelectorAll('[data-metric]')];
@@ -54,7 +35,7 @@ if (canvas && !reduced.matches && canvas.getContext) {
     if (document.hidden || reduced.matches) { frame = 0; return; }
     if (now - previous > 32) {
       const dt = Math.min((now - previous) / 16.67, 3); previous = now; ctx.clearRect(0,0,width,height);
-      dots.forEach(dot => { dot.y -= dot.v * dt; if (dot.y < -3) dot.y = height + 3; ctx.beginPath();ctx.arc(dot.x,dot.y,dot.r,0,Math.PI*2);ctx.fillStyle=`rgba(238,208,160,${dot.a})`;ctx.fill(); });
+      dots.forEach(dot => { dot.y -= dot.v * dt; if (dot.y < -3) dot.y = height + 3; ctx.beginPath();ctx.arc(dot.x,dot.y,dot.r,0,Math.PI*2);ctx.fillStyle=`rgba(239,165,188,${dot.a})`;ctx.fill(); });
     }
     frame = requestAnimationFrame(draw);
   };
