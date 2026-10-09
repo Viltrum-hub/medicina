@@ -49,13 +49,13 @@ if (canvas && canvas.getContext) {
     width=innerWidth;height=innerHeight;
     const dpr=Math.min(devicePixelRatio||1,2);
     canvas.width=width*dpr;canvas.height=height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
-    const count=width<760?430:1250;
+    const count=width<760?650:2350;
     grains=Array.from({length:count},()=>({ribbon:Math.floor(Math.random()*ribbons.length),u:Math.random(),
       spread:(Math.random()+Math.random()+Math.random()-1.5)*(width<760?42:66),
-      r:Math.random()<.08?1.2+Math.random()*.65:.3+Math.random()*.7,
-      alpha:.18+Math.random()*.55,phase:Math.random()*6.28,spark:Math.random()<.025}));
+      r:Math.random()<.08?1.2+Math.random()*.65:.4+Math.random()*.85,
+      alpha:.25+Math.random()*.68,phase:Math.random()*6.28,spark:Math.random()<.025}));
     bokeh=Array.from({length:width<760?24:68},()=>({x:Math.random()*width,y:Math.random()*height,
-      r:2+Math.random()*5,alpha:.04+Math.random()*.11,phase:Math.random()*6.28}));
+      r:2+Math.random()*5,alpha:.06+Math.random()*.16,phase:Math.random()*6.28}));
     render(performance.now());
   }
   function render(now){
