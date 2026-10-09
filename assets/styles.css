@@ -28,3 +28,5 @@ html:not(.js) .gallery{height:auto;display:block;max-height:none}html:not(.js) .
 .site-header{position:sticky;top:0;z-index:50;background:rgba(20,6,14,.97);backdrop-filter:blur(14px);box-shadow:0 8px 24px rgba(10,2,7,.16)}.reading-progress{z-index:60}.skip{z-index:70}html{scroll-padding-top:130px}.interior .chapter-photo{filter:brightness(1.3) contrast(1.06) saturate(1.13);opacity:1;box-shadow:0 16px 45px rgba(12,2,8,.2),0 0 30px rgba(236,142,178,.12)}.interior .chapter-shade{background:linear-gradient(115deg,rgba(97,21,56,.08),rgba(211,88,134,.035));mix-blend-mode:normal}@media(max-width:760px){html{scroll-padding-top:110px}.site-header nav.is-open{max-height:calc(100svh - 110px);overflow-y:auto}}
 
 .page-nosotros .chapter-photo,.page-marco-teorico .chapter-photo,.page-propuestas .chapter-photo{object-position:55% center;filter:brightness(1.08) contrast(1.03) saturate(1.07)}
+
+.page-resultados .chapter-photo{object-position:50% center;filter:brightness(1.08) contrast(1.03) saturate(1.07)}
