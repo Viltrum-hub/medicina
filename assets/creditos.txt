@@ -20,3 +20,8 @@ Pulso editorial — borgoña y rosa metálico
 rose-instrument.webp: ilustración de un estetoscopio con reflejos rosados.
 rose-network.webp: ilustración de una tableta con conexiones digitales abstractas.
 Imágenes ilustrativas; no son evidencia del estudio ni contienen datos de pacientes.
+
+Identidad rosa metálico
+rose-emblem.webp: emblema de corazón, pulso y estetoscopio sobre fondo transparente.
+rose-atrium.webp: ilustración arquitectónica de un atrio hospitalario al atardecer.
+rose-telehealth.webp: escena ilustrativa de videollamada con personas ficticias; no contiene datos reales de pacientes.
