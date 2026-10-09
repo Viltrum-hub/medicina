@@ -45,8 +45,9 @@ if (canvas && canvas.getContext) {
     const p=curve(ribbons[grain.ribbon],grain.u);
     const next=curve(ribbons[grain.ribbon],Math.min(1,grain.u+.003));
     const angle=Math.atan2(next.y-p.y,next.x-p.x);
-    const drift=Math.sin(grain.u*7+grain.phase+t)*9;
-    return {x:p.x-Math.sin(angle)*(grain.spread+drift),y:p.y+Math.cos(angle)*(grain.spread+drift)};
+    const drift=Math.sin(grain.u*7+grain.phase+t)*12;
+    const float=Math.sin(t*.7+grain.phase)*5;
+    return {x:p.x-Math.sin(angle)*(grain.spread+drift)+Math.cos(angle)*float,y:p.y+Math.cos(angle)*(grain.spread+drift)+Math.sin(angle)*float};
   }
   function resize(){
     width=innerWidth;height=innerHeight;
@@ -62,7 +63,7 @@ if (canvas && canvas.getContext) {
     render(performance.now());
   }
   function render(now){
-    const t=reduced.matches?0:now*.000085;
+    const t=reduced.matches?0:now*.00022;
     ctx.clearRect(0,0,width,height);
     // Fine luminous strands follow the dust ribbons.
     ribbons.forEach((path,index)=>{
@@ -76,7 +77,7 @@ if (canvas && canvas.getContext) {
       }
     });
     bokeh.forEach(dot=>{
-      const x=dot.x+Math.sin(t+dot.phase)*6,y=dot.y+Math.cos(t*.7+dot.phase)*5;
+      const x=dot.x+Math.sin(t+dot.phase)*10,y=dot.y+Math.cos(t*.7+dot.phase)*8;
       const glow=ctx.createRadialGradient(x,y,0,x,y,dot.r*2);
       glow.addColorStop(0,`rgba(227,93,132,${dot.alpha})`);glow.addColorStop(.42,`rgba(238,114,154,${dot.alpha*.8})`);glow.addColorStop(1,'rgba(238,114,154,0)');
       ctx.fillStyle=glow;ctx.fillRect(x-dot.r*2,y-dot.r*2,dot.r*4,dot.r*4);
