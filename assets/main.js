@@ -32,8 +32,8 @@ if (canvas && canvas.getContext) {
     const dpr = Math.min(devicePixelRatio || 1,2);
     canvas.width = width*dpr; canvas.height = height*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
     points = [];
-    const count = width < 760 ? 130 : 290;
-    waves.forEach((wave,index) => { for (let i=0;i<count;i++) points.push({wave:index,u:Math.random(),spread:(Math.random()-.5)*.17,r:Math.random()<.035?Math.random()*2+1.6:Math.random()*1+.25,alpha:Math.random()*.58+.08,phase:Math.random()*6.28}); });
+    const count = width < 760 ? 150 : 420;
+    waves.forEach((wave,index) => { for (let i=0;i<count;i++) points.push({wave:index,u:Math.random(),spread:(Math.random()-.5)*.085,r:Math.random()<.035?Math.random()*2+1.6:Math.random()*1+.25,alpha:Math.random()*.58+.17,phase:Math.random()*6.28}); });
     points.sort((a,b)=>a.wave-b.wave||a.u-b.u);
     dust = Array.from({length:width<760?20:55},()=>({x:Math.random()*width,y:Math.random()*height,r:Math.random()*1.7+.5,a:Math.random()*.23+.05}));
     render(performance.now());
@@ -46,7 +46,7 @@ if (canvas && canvas.getContext) {
       const wave = waves[point.wave];
       const x=(wave.left+point.u*wave.span)*width;
       const y=(wave.y+Math.sin(point.u*6.2+wave.phase+t)*wave.amplitude+point.spread*Math.sin(point.u*3.14))*height;
-      if(last && last.wave===point.wave && Math.abs(y-last.y)<34 && x-last.x<26) {ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(x,y);ctx.strokeStyle='rgba(223,94,146,.13)';ctx.lineWidth=.55;ctx.stroke();}
+      if(last && last.wave===point.wave && Math.abs(y-last.y)<34 && x-last.x<26) {ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(x,y);ctx.strokeStyle='rgba(223,94,146,.23)';ctx.lineWidth=.55;ctx.stroke();}
       const alpha=point.alpha*(.78+.22*Math.sin(t*2+point.phase));
       ctx.beginPath();ctx.arc(x,y,point.r,0,Math.PI*2);ctx.fillStyle=`rgba(236,114,160,${alpha})`;ctx.fill();
       if(point.r>1.6){const glow=ctx.createRadialGradient(x,y,0,x,y,point.r*5);glow.addColorStop(0,`rgba(243,132,178,${alpha*.35})`);glow.addColorStop(1,'rgba(243,132,178,0)');ctx.fillStyle=glow;ctx.fillRect(x-point.r*5,y-point.r*5,point.r*10,point.r*10);}
