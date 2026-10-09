@@ -4,7 +4,6 @@
   "start": "2023-09-17",
   "end": "2023-10-24",
   "unit": "Porcentaje de hospitales que cumplen el criterio",
-  "source": "Marco teorico de la Gabriela.docx",
   "metrics": [
     {
       "id": "redes",
@@ -23,3 +22,4 @@
     }
   ]
 }
+
