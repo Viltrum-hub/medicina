@@ -9,8 +9,8 @@ if (menu && nav) {
 const filter = document.querySelector('#result-filter');
 if (filter) filter.addEventListener('change', () => {
   const cards = [...document.querySelectorAll('[data-metric]')];
-  cards.forEach(card => { card.hidden = filter.value !== 'all' && card.dataset.metric !== filter.value; });
-  document.querySelector('#filter-status').textContent = filter.value === 'all' ? 'Se muestran los tres indicadores.' : `Se muestra: ${filter.options[filter.selectedIndex].text}.`;
+  cards.forEach(card => { card.hidden = filter.value !== 'all' && card.dataset.group !== filter.value; });
+  document.querySelector('#filter-status').textContent = `Se muestran ${cards.filter(card => !card.hidden).length} herramientas${filter.value === 'all' ? '' : ': ' + filter.options[filter.selectedIndex].text.toLowerCase()}.`;
 });
 const progress = document.querySelector('.reading-progress');
 let scrollPending = false;

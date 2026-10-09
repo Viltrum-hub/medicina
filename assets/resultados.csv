@@ -1,4 +1,8 @@
-criterio;porcentaje;unidad;muestra;inicio;fin
-Redes sociales;97;porcentaje de hospitales;100 hospitales oncológicos de Estados Unidos;2023-09-17;2023-10-24
-Portales de pacientes;94;porcentaje de hospitales;100 hospitales oncológicos de Estados Unidos;2023-09-17;2023-10-24
-Aplicaciones móviles;90;porcentaje de hospitales;100 hospitales oncológicos de Estados Unidos;2023-09-17;2023-10-24
+criterio;hospitales;porcentaje;muestra;inicio;fin;cita;doi
+Redes sociales;97;97;100;2023-09-17;2023-10-24;Medina-Aguerrebere et al. (2026);https://doi.org/10.31009/hipertext.net.2026.i32.11
+Portales de pacientes;94;94;100;2023-09-17;2023-10-24;Medina-Aguerrebere et al. (2026);https://doi.org/10.31009/hipertext.net.2026.i32.11
+Aplicaciones móviles;90;90;100;2023-09-17;2023-10-24;Medina-Aguerrebere et al. (2026);https://doi.org/10.31009/hipertext.net.2026.i32.11
+Bibliotecas interactivas de salud;84;84;100;2023-09-17;2023-10-24;Medina-Aguerrebere et al. (2026);https://doi.org/10.31009/hipertext.net.2026.i32.11
+Consultas médicas en línea;63;63;100;2023-09-17;2023-10-24;Medina-Aguerrebere et al. (2026);https://doi.org/10.31009/hipertext.net.2026.i32.11
+Verificadores de síntomas;47;47;100;2023-09-17;2023-10-24;Medina-Aguerrebere et al. (2026);https://doi.org/10.31009/hipertext.net.2026.i32.11
+Chatbots;16;16;100;2023-09-17;2023-10-24;Medina-Aguerrebere et al. (2026);https://doi.org/10.31009/hipertext.net.2026.i32.11

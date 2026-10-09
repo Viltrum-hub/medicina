@@ -3,23 +3,72 @@
   "sample": "Hospitales oncológicos de Estados Unidos incluidos en el análisis",
   "start": "2023-09-17",
   "end": "2023-10-24",
-  "unit": "Porcentaje de hospitales que cumplen el criterio",
+  "publication_year": 2026,
+  "unit": "Porcentaje de hospitales que disponían de la herramienta",
+  "citation": "Medina-Aguerrebere et al. (2026)",
+  "doi": "https://doi.org/10.31009/hipertext.net.2026.i32.11",
   "metrics": [
     {
       "id": "redes",
       "label": "Redes sociales",
-      "percent": 97
+      "percent": 97,
+      "group": "canales"
     },
     {
       "id": "portales",
       "label": "Portales de pacientes",
-      "percent": 94
+      "percent": 94,
+      "group": "canales"
     },
     {
       "id": "apps",
       "label": "Aplicaciones móviles",
-      "percent": 90
+      "percent": 90,
+      "group": "canales"
+    },
+    {
+      "id": "bibliotecas",
+      "label": "Bibliotecas interactivas de salud",
+      "percent": 84,
+      "group": "orientacion"
+    },
+    {
+      "id": "consultas",
+      "label": "Consultas médicas en línea",
+      "percent": 63,
+      "group": "atencion"
+    },
+    {
+      "id": "sintomas",
+      "label": "Verificadores de síntomas",
+      "percent": 47,
+      "group": "orientacion"
+    },
+    {
+      "id": "chatbots",
+      "label": "Chatbots",
+      "percent": 16,
+      "group": "orientacion"
     }
-  ]
+  ],
+  "ai_organization": {
+    "departments": {
+      "count": 19,
+      "denominator": 100
+    },
+    "university_partners": {
+      "count": 9,
+      "denominator": 19
+    },
+    "technology_partners": {
+      "count": 12,
+      "denominator": 19
+    },
+    "without_department": {
+      "count": 81,
+      "external_research": 35,
+      "internal_research": 34,
+      "no_ai_mention": 12
+    }
+  }
 }
-
