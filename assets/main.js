@@ -26,37 +26,73 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const canvas = document.querySelector('#particles');
 if (canvas && canvas.getContext) {
   const ctx = canvas.getContext('2d');
-  let width = 0, height = 0, frame = 0, previous = 0, points = [], dust = [];
-  const waves = [{left:-.06,span:.56,y:.63,amplitude:.15,phase:0},{left:.61,span:.48,y:.26,amplitude:.12,phase:2.4},{left:.2,span:.79,y:.9,amplitude:.12,phase:4.7}];
-  function resize() {
-    width = innerWidth; height = innerHeight;
-    const dpr = Math.min(devicePixelRatio || 1,2);
-    canvas.width = width*dpr; canvas.height = height*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
-    points = [];
-    const count = width < 760 ? 150 : 420;
-    waves.forEach((wave,index) => { for (let i=0;i<count;i++) points.push({wave:index,u:Math.random(),spread:(Math.random()-.5)*.085,r:Math.random()<.035?Math.random()*2+1.6:Math.random()*1+.25,alpha:Math.random()*.58+.17,phase:Math.random()*6.28}); });
-    points.sort((a,b)=>a.wave-b.wave||a.u-b.u);
-    dust = Array.from({length:width<760?20:55},()=>({x:Math.random()*width,y:Math.random()*height,r:Math.random()*1.7+.5,a:Math.random()*.23+.05}));
+  let width = 0, height = 0, frame = 0, previous = 0, grains = [], bokeh = [];
+  const ribbons = [
+    [[-.12,.55],[.2,.49],[.35,.9],[.73,.71]],
+    [[.48,.82],[.73,.73],[.85,.58],[1.14,.43]],
+    [[.26,.07],[.53,.3],[.77,.3],[1.14,.12]],
+    [[.04,.9],[.39,.94],[.71,.76],[1.12,.94]]
+  ];
+  function curve(path,u){
+    const v=1-u;
+    return {x:(v*v*v*path[0][0]+3*v*v*u*path[1][0]+3*v*u*u*path[2][0]+u*u*u*path[3][0])*width,
+      y:(v*v*v*path[0][1]+3*v*v*u*path[1][1]+3*v*u*u*path[2][1]+u*u*u*path[3][1])*height};
+  }
+  function position(grain,t){
+    const p=curve(ribbons[grain.ribbon],grain.u);
+    const next=curve(ribbons[grain.ribbon],Math.min(1,grain.u+.003));
+    const angle=Math.atan2(next.y-p.y,next.x-p.x);
+    const drift=Math.sin(grain.u*7+grain.phase+t)*9;
+    return {x:p.x-Math.sin(angle)*(grain.spread+drift),y:p.y+Math.cos(angle)*(grain.spread+drift)};
+  }
+  function resize(){
+    width=innerWidth;height=innerHeight;
+    const dpr=Math.min(devicePixelRatio||1,2);
+    canvas.width=width*dpr;canvas.height=height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    const count=width<760?430:1250;
+    grains=Array.from({length:count},()=>({ribbon:Math.floor(Math.random()*ribbons.length),u:Math.random(),
+      spread:(Math.random()+Math.random()+Math.random()-1.5)*(width<760?42:66),
+      r:Math.random()<.08?1.2+Math.random()*.65:.3+Math.random()*.7,
+      alpha:.18+Math.random()*.55,phase:Math.random()*6.28,spark:Math.random()<.025}));
+    bokeh=Array.from({length:width<760?24:68},()=>({x:Math.random()*width,y:Math.random()*height,
+      r:2+Math.random()*5,alpha:.04+Math.random()*.11,phase:Math.random()*6.28}));
     render(performance.now());
   }
-  function render(now) {
-    const t = reduced.matches ? 0 : now*.00014;
+  function render(now){
+    const t=reduced.matches?0:now*.000085;
     ctx.clearRect(0,0,width,height);
-    let last = null;
-    points.forEach(point => {
-      const wave = waves[point.wave];
-      const x=(wave.left+point.u*wave.span)*width;
-      const y=(wave.y+Math.sin(point.u*6.2+wave.phase+t)*wave.amplitude+point.spread*Math.sin(point.u*3.14))*height;
-      if(last && last.wave===point.wave && Math.abs(y-last.y)<34 && x-last.x<26) {ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(x,y);ctx.strokeStyle='rgba(223,94,146,.23)';ctx.lineWidth=.55;ctx.stroke();}
-      const alpha=point.alpha*(.78+.22*Math.sin(t*2+point.phase));
-      ctx.beginPath();ctx.arc(x,y,point.r,0,Math.PI*2);ctx.fillStyle=`rgba(236,114,160,${alpha})`;ctx.fill();
-      if(point.r>1.6){const glow=ctx.createRadialGradient(x,y,0,x,y,point.r*5);glow.addColorStop(0,`rgba(243,132,178,${alpha*.35})`);glow.addColorStop(1,'rgba(243,132,178,0)');ctx.fillStyle=glow;ctx.fillRect(x-point.r*5,y-point.r*5,point.r*10,point.r*10);}
-      last={x,y,wave:point.wave};
+    // Fine luminous strands follow the dust ribbons.
+    ribbons.forEach((path,index)=>{
+      for(let strand=0;strand<2;strand++){
+        ctx.beginPath();
+        for(let i=0;i<=90;i++){
+          const u=i/90,p=curve(path,u),offset=Math.sin(u*7+t+index)*6+strand*5;
+          if(i===0)ctx.moveTo(p.x,p.y+offset);else ctx.lineTo(p.x,p.y+offset);
+        }
+        ctx.strokeStyle=`rgba(243,132,164,${strand===0?.18:.065})`;ctx.lineWidth=strand===0?.7:.45;ctx.stroke();
+      }
     });
-    dust.forEach(dot=>{ctx.beginPath();ctx.arc(dot.x,dot.y,dot.r,0,Math.PI*2);ctx.fillStyle=`rgba(244,146,182,${dot.a})`;ctx.fill();});
+    bokeh.forEach(dot=>{
+      const x=dot.x+Math.sin(t+dot.phase)*6,y=dot.y+Math.cos(t*.7+dot.phase)*5;
+      const glow=ctx.createRadialGradient(x,y,0,x,y,dot.r*2);
+      glow.addColorStop(0,`rgba(227,93,132,${dot.alpha})`);glow.addColorStop(.42,`rgba(238,114,154,${dot.alpha*.8})`);glow.addColorStop(1,'rgba(238,114,154,0)');
+      ctx.fillStyle=glow;ctx.fillRect(x-dot.r*2,y-dot.r*2,dot.r*4,dot.r*4);
+    });
+    grains.forEach(grain=>{
+      const p=position(grain,t),alpha=grain.alpha*(.75+.25*Math.sin(t+grain.phase));
+      ctx.fillStyle=`rgba(${grain.spark?'255,200,210':'236,113,148'},${alpha})`;
+      ctx.beginPath();ctx.arc(p.x,p.y,grain.r,0,Math.PI*2);ctx.fill();
+      if(grain.spark){
+        const glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,6);
+        glow.addColorStop(0,`rgba(255,188,206,${alpha*.45})`);glow.addColorStop(1,'rgba(255,150,187,0)');
+        ctx.fillStyle=glow;ctx.fillRect(p.x-6,p.y-6,12,12);
+        ctx.strokeStyle=`rgba(255,202,216,${alpha*.28})`;ctx.lineWidth=.5;
+        ctx.beginPath();ctx.moveTo(p.x-3,p.y);ctx.lineTo(p.x+3,p.y);ctx.moveTo(p.x,p.y-3);ctx.lineTo(p.x,p.y+3);ctx.stroke();
+      }
+    });
   }
-  function draw(now) {
-    if (document.hidden || reduced.matches) {frame=0;return;}
+  function draw(now){
+    if(document.hidden||reduced.matches){frame=0;return;}
     if(now-previous>40){render(now);previous=now;}
     frame=requestAnimationFrame(draw);
   }

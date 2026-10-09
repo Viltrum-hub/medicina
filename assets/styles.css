@@ -30,3 +30,5 @@ html:not(.js) .gallery{height:auto;display:block;max-height:none}html:not(.js) .
 .page-nosotros .chapter-photo,.page-marco-teorico .chapter-photo,.page-propuestas .chapter-photo{object-position:55% center;filter:brightness(1.08) contrast(1.03) saturate(1.07)}
 
 .page-resultados .chapter-photo{object-position:50% center;filter:brightness(1.08) contrast(1.03) saturate(1.07)}
+
+#particles{opacity:.93}@media(prefers-reduced-motion:reduce){#particles{display:block}}
